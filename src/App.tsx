@@ -1,10 +1,11 @@
 import MenuItem from "./components/MenuItem"
+import { OrderContents } from "./components/OrderContents"
 import { menuItems } from "./data/db"
 import useOrder from "./hooks/userOrder"
 
 function App() {
 
-  const {addItem} = useOrder ()
+  const { order, addItem, removeItem } = useOrder ()
 
   return (
     <>
@@ -15,7 +16,7 @@ function App() {
     <main className=" mx-auto max-w-4xl py-20 grid md:grid-cols-2">
       <div>
         <h2 className="text-4xl font-black text-center mb-4">Menú</h2>
-        <div className="space-y-3">
+        <div className="space-y-3 mt-5">
         {menuItems.map(item => (
           <MenuItem
             key={item.id}
@@ -26,8 +27,11 @@ function App() {
         </div>
       </div>
 
-      <div>
-        <h2 className="text-4xl font-black text-center mb-4">Consumo</h2>
+      <div className="border border-dashed mx-5 border-slate-300 rounded-lg space-y-10">
+        <OrderContents
+        order={order}
+        removeItem={removeItem}
+        />
       </div>
       
     </main>
